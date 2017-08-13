@@ -7,21 +7,9 @@ var board = {
 	element: $('#board .column-container')
 };
 
-/*$('.create-column')
+$('.create-column')
 	.click(function(){
-		board.createColumn(new Column(prompt('Wpisz nazwę kolumny')));
-	});*/
-	
-	$('.create-column').click(function() {
-	var columnName = prompt('Enter a column name');
-	board.createColumn(new Column(columnName));
-	});
-	
-	//create column ma byc niejako inicjowane 2x??
-	
-	$('.create-column')
-    .click(function() {
-        var columnName = prompt('Enter a column name');
+		var columnName = prompt('Enter a column name');
         $.ajax({
     		url: baseUrl + '/column',
     		method: 'POST',

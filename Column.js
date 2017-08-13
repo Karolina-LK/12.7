@@ -2,16 +2,9 @@ function Column(id, name) {
 	var self = this;
 	
 	this.id = id;
-	this.name = name;
+	this.name = name || 'No name given';
 	this.element = createColumn();
-	
-	//dodanie functionColumn
-	function Column(id, name) {
-    this.id = id;
-    this.name = name || 'No name given';
-	}
-	
-	
+
 	function createColumn() {
 		// TWORZENIE NOWYCH WĘZŁÓW
 		var column = $('<div class="column"></div>');
@@ -25,38 +18,21 @@ function Column(id, name) {
 			self.deleteColumn();
 		});
 		
-		
-		//zamiana na column Add
-		/*columnAddCard.click(function(event) {
-			event.preventDefault();
-			self.createCard(new Card(prompt("Wpisz nazwę karty")));
-			
-		});*/
-		
-		
-		//dodanie opcjo tworz kolomny
 		columnAddCard.click(function(event) {
-		var cardName = prompt("Enter the name of the card");
-		event.preventDefault();
+			var cardName = prompt("Enter the name of the card");
+	event.preventDefault();
 		$.ajax({
-    	url: baseUrl + '/card',
-    	method: 'POST',
-    	data: {
-    	name: cardName,
-    	bootcamp_kanban_column_id: self.id
-    	},
+    		url: baseUrl + '/card',
+    		method: 'POST',
+    		data: {
+    		name: cardName,
+    		bootcamp_kanban_column_id: self.id
+    		},
     	success: function(response) {
-        var card = new Card(response.id, cardName);
-        self.createCard(card);
-    	}
-		});
-		
-		
-		//czy ta ponizej wylatuje?
-		columnAddCard.click(function(event) {
-		var cardName = prompt("Enter the name of the card");
-		event.preventDefault();
-		self.createCard(new Card(cardName));
+        	var card = new Card(response.id, cardName);
+        	self.createCard(card);
+    		}
+			});
 		});
 			
 			// KONSTRUOWANIE ELEMENTU KOLUMNY
@@ -65,7 +41,7 @@ function Column(id, name) {
 			.append(columnAddCard)
 			.append(columnCardList);
 			return column;
-		});
+		}
 	}
 Column.prototype = {
 	createCard: function(card) {
@@ -73,13 +49,12 @@ Column.prototype = {
 	},
 	deleteColumn: function() {
 	  var self = this;
-    	$.ajax({
-    	  url: baseUrl + '/column/' + self.id,
-    	  method: 'DELETE',
-    	  success: function(response){
-    		   self.element.remove();
-      		}
-    	});
-    }
- }
-	};
+    $.ajax({
+      url: baseUrl + '/column/' + self.id,
+      method: 'DELETE',
+      success: function(response){
+        self.element.remove();
+      }
+    });
+	}
+};

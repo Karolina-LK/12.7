@@ -2,9 +2,8 @@
 function Card(id, name) {
 	var self = this;
 	
-/*	this.id = randomString();*/
-	this.id = id
-	this.name = name || 'No name given'
+	this.id = id;
+	this.name = name || 'No name given';
 	this.element = createCard();
 
 	function createCard() {
@@ -23,18 +22,14 @@ function Card(id, name) {
 	}
 }
 Card.prototype = {
-	// czy poprzednia wersja remove wylatuje?
-	/*removeCard: function() {
-	  this.element.remove();
-	}*/
 	removeCard: function() {
-    var self = this;
-    $.ajax({
-      url: baseUrl + '/card/' + self.id,
-      method: 'DELETE',
-      success: function(){
-        self.element.remove();
-      }
-    });
-}
+		var self = this;
+    	$.ajax({
+    	  url: baseUrl + '/card/' + self.id,
+    	  method: 'DELETE',
+    	  success: function(){
+    	    self.element.remove();
+    	  }
+    	});
+	}
 }
